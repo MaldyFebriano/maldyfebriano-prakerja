@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header>
+        <nav>
+        <h1>LOGO</h1>
+        <ul class="tabs">
+            <li class="tab"><a data-switcher data-tab="1">Home</a></li>
+            <li class="tab"><a data-switcher data-tab="2">About</a></li>
+            <li class="tab"><a data-switcher data-tab="3">Portofolio</a></li>
+            <li class="tab"><a data-switcher data-tab="4">Blog</a></li>
+            <li class="tab"><a data-switcher data-tab="5">Team</a></li>
+            <li class="tab"><a data-switcher data-tab="6">Contact</a></li>
+        </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="pages">
+            <div class="page is-active" data-page="1"><h2>Page 1</h2><p>Welcome to the home Page</p></div>
+            <div class="page" data-page="2"><h2>Page 2</h2><p>Welcome to the about data-page</p></div>
+            <div class="page" data-page="3"><h2>Page 3</h2><p>Welcome to the portofolio page</p></div>
+            <div class="page" data-page="4"><h2>Page 4</h2><p>Welcome to the blog page</p></div>
+            <div class="page" data-page="5"><h2>Page 5</h2><p>Welcome to the team page</p></div>
+            <div class="page" data-page="6"><h2>Page 6</h2><p>Welcome to the contact page</p></div>
+        </section>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>
+
+window.onload = () => {
+    const tab_switchers = document.querySelectorAll('[data-switcher]');
+
+    for (let i=0; i < tab_switchers.length; i++) {
+        const tab_switcher = tab_switchers [i];
+        const page_id = tab_switcher.dataset.tab;
+
+        tab_switcher.addEventListener('click', () => {
+            document.querySelector('.tabs .tab.is-active').classList.remove('is-active');
+            tab_switcher.parentNode.classList.add('is-active');
+            
+            SwitchPage(page_id);
+        });
+    }
+}
+
+function SwitchPage (page_id) {
+    console.log(page_id);
+    const current_page = document.querySelector('.pages .page.is-active');
+    current_page.classList.remove('is-active');
+    
+    const next_page = document.querySelector(`.pages .page[data-page="${page_id}"]`);
+    next_page.classList.add('is-active');
+}
+* {margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+
+body {background-color: white;}
+
+header { background-color: darkslateblue; 
+         box-shadow: 2px 3px 6px black;}
+
+header nav {display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 142px;
+            padding-right: 400px;}
+
+header nav h1 {font-size: 36pt;
+               font-weight: 600;
+                color: aliceblue;}
+
+header nav .tabs {list-style-type: none;
+                  display: flex;
+                  justify-content: flex-end;}
+
+header nav .tabs .tab {display: block;}
+
+header nav .tabs .tab a[data-switcher] {
+    display: block;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: aliceblue;
+    font-size: 14pt;
+    cursor: pointer;}
+
+header nav .tabs .tab:hover a[data-switcher] {
+    color: brown;
+    border-radius: 1px;
+    background-color: darkslateblue;
+    box-shadow: 0px 2px brown ;
+}
+
+main {padding-left: 142px;
+    padding-right: 142px;}
+
+.pages {margin-top: 100px;
+        padding: 50px 30px;
+        border-radius: 8px;
+        background-color: rgb(170, 160, 231);
+        box-shadow: 0px 3px rgb(228, 225, 225);}
+
+.pages .page {display: none;}
+
+.pages .page.is-active {display: block;}
